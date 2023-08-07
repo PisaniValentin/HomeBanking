@@ -30,7 +30,6 @@ public class Account {
         this.client = client;
     }
 
-    @JsonIgnore
     public Client getClient() {
         return client;
     }
