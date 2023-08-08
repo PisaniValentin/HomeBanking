@@ -13,14 +13,14 @@ public class Transaction {
     @GenericGenerator(name="native",strategy = "native")
     private long id;
 
-    private long amount;
+    private float amount;
     private String description;
     private LocalDateTime date;
     private TransactionType type;
 
     public Transaction(){}
 
-    public Transaction(long amount,String description, TransactionType type){
+    public Transaction(float amount,String description, TransactionType type){
         this.amount = amount;
         this.description = description;
         this.type = type;
@@ -30,11 +30,11 @@ public class Transaction {
     @ManyToOne(fetch = FetchType.EAGER)
     private Account account;
 
-    public Long getAmount() {
+    public float getAmount() {
         return amount;
     }
 
-    public void setAmount(Long amount) {
+    public void setAmount(float amount) {
         this.amount = amount;
     }
 
