@@ -32,10 +32,10 @@ public class HomebankingApplication {
 			Account account3 = new Account("VIN003", LocalDate.now().plusDays(1),3000);
 			Account account4 = new Account("VIN004", LocalDate.now(),4500);
 
-			Transaction transaction1 = new Transaction(-1000f,"Debito1", TransactionType.debito);
-			Transaction transaction2 = new Transaction(-6000f,"Debito2", TransactionType.debito);
-			Transaction transaction3 = new Transaction(3000f,"Credito1", TransactionType.credito);
-			Transaction transaction4 = new Transaction(2500f,"Credito2", TransactionType.credito);
+			Transaction transaction1 = new Transaction(-1000f,"Debito1", TransactionType.DEBIT);
+			Transaction transaction2 = new Transaction(-6000f,"Debito2", TransactionType.DEBIT);
+			Transaction transaction3 = new Transaction(3000f,"Credito1", TransactionType.CREDIT);
+			Transaction transaction4 = new Transaction(2500f,"Credito2", TransactionType.CREDIT);
 
 			account1.addTransaction(transaction1);
 			account1.addTransaction(transaction2);
