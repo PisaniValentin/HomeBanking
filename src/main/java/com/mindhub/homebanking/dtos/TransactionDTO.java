@@ -2,13 +2,13 @@ package com.mindhub.homebanking.dtos;
 
 import com.mindhub.homebanking.models.Transaction;
 import com.mindhub.homebanking.models.TransactionType;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class TransactionDTO {
     private long id;
-    private long amount;
+    private float amount;
     private String description;
-    private LocalDate date;
+    private LocalDateTime date;
     private TransactionType type;
 
     public TransactionDTO(Transaction transaction){
@@ -23,7 +23,7 @@ public class TransactionDTO {
         return id;
     }
 
-    public long getAmount() {
+    public float getAmount() {
         return amount;
     }
 
@@ -31,7 +31,7 @@ public class TransactionDTO {
         return description;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 

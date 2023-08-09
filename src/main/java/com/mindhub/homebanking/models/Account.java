@@ -14,14 +14,14 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     private long id;
     private String number;
-    private LocalDate creationDate;
+    private LocalDate date;
     private double balance;
 
     public Account(){}
 
     public Account(String number, LocalDate creationDate, double balance){
         this.number = number;
-        this.creationDate = creationDate;
+        this.date = creationDate;
         this.balance = balance;
     }
 
@@ -51,8 +51,8 @@ public class Account {
         this.number = number;
     }
 
-    public void setCreationDate(LocalDate creationDate) {
-        this.creationDate = creationDate;
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     public void setBalance(double balance) {
@@ -63,8 +63,8 @@ public class Account {
         return number;
     }
 
-    public LocalDate getCreationDate() {
-        return creationDate;
+    public LocalDate getDate() {
+        return date;
     }
 
     public double getBalance() {
