@@ -67,14 +67,22 @@ public class HomebankingApplication {
 			List<Integer> cuotas3 = List.of(6,12,24,36);
 			prestamo3.setPayments(cuotas3);
 
-			ClientLoan clientLoan1 = new ClientLoan(melba,prestamo1,60,400000);
-			ClientLoan clientLoan2 = new ClientLoan(melba,prestamo2,12,50000);
-			ClientLoan clientLoan3 = new ClientLoan(valentin,prestamo2,24,100000);
-			ClientLoan clientLoan4 = new ClientLoan(valentin,prestamo3,36,200000);
+			ClientLoan clientLoan1 = new ClientLoan(400000,60);
+			ClientLoan clientLoan2 = new ClientLoan(50000,12);
+			ClientLoan clientLoan3 = new ClientLoan(100000,24);
+			ClientLoan clientLoan4 = new ClientLoan(200000,36);
+
 			melba.addClientLoan(clientLoan1);
 			melba.addClientLoan(clientLoan2);
 			valentin.addClientLoan(clientLoan3);
 			valentin.addClientLoan(clientLoan4);
+
+			prestamo1.addClientLoan(clientLoan1);
+			prestamo2.addClientLoan(clientLoan2);
+			prestamo2.addClientLoan(clientLoan3);
+			prestamo3.addClientLoan(clientLoan4);
+
+
 
 
 			loanRepository.save(prestamo1);
@@ -84,10 +92,6 @@ public class HomebankingApplication {
 			clientRepository.save(melba);
 			clientRepository.save(valentin);
 
-			clientLoanRepository.save(clientLoan1);
-			clientLoanRepository.save(clientLoan2);
-			clientLoanRepository.save(clientLoan3);
-			clientLoanRepository.save(clientLoan4);
 
 			accountRepository.save(account1);
 			accountRepository.save(account2);
@@ -98,6 +102,12 @@ public class HomebankingApplication {
 			transactionRepository.save(transaction2);
 			transactionRepository.save(transaction3);
 			transactionRepository.save(transaction4);
+
+
+			clientLoanRepository.save(clientLoan1);
+			clientLoanRepository.save(clientLoan2);
+			clientLoanRepository.save(clientLoan3);
+			clientLoanRepository.save(clientLoan4);
 
 		};
 	}
