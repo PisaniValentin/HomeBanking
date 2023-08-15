@@ -26,8 +26,6 @@ public class AccountDTO {
         return transactions;
     }
 
-    public AccountDTO(){}
-
     public long getId() {
         return id;
     }

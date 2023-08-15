@@ -17,7 +17,6 @@ public class TransactionDTO {
         this.type = transaction.getType();
         date = transaction.getDate();
     }
-    public TransactionDTO(){}
 
     public long getId() {
         return id;

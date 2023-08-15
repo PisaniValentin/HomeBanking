@@ -17,6 +17,12 @@ public class Account {
     private LocalDate date;
     private double balance;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Client client;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "account")
+    private Set<Transaction> transactions = new HashSet<>();
+
     public Account(){}
 
     public Account(String number, LocalDate creationDate, double balance){
@@ -24,12 +30,6 @@ public class Account {
         this.date = creationDate;
         this.balance = balance;
     }
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Client client;
-
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "account")
-    private Set<Transaction> transactions = new HashSet<>();
 
     public Set<Transaction> getTransactions() {
         return transactions;

@@ -12,11 +12,13 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.AUTO,generator = "native")
     @GenericGenerator(name="native",strategy = "native")
     private long id;
-
     private float amount;
     private String description;
     private LocalDateTime date;
     private TransactionType type;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Account account;
+
 
     public Transaction(){}
 
@@ -27,8 +29,7 @@ public class Transaction {
         date = LocalDateTime.now();
     }
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Account account;
+
 
     public float getAmount() {
         return amount;

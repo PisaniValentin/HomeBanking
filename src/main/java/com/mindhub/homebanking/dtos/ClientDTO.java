@@ -9,14 +9,10 @@ import java.util.stream.Collectors;
 public class ClientDTO {
     private long id;
     private String firstName,lastName,email;
-
     private Set<AccountDTO> accounts;
-
     private Set<ClientLoanDTO> loans;
     private Set<CardDTO> cards;
-
-    public ClientDTO(){}
-
+    
     public ClientDTO(Client client) {
         this.id = client.getId();
         this.firstName = client.getFirstName();
