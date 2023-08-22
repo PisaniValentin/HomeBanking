@@ -17,12 +17,11 @@ public class WebAuthorization extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/web/index.html").permitAll()
-                .antMatchers("/web/account.html").hasAuthority("CLIENT")
-                .antMatchers("/admin/**").hasAuthority("ADMIN")
-                .antMatchers("/rest/**").hasAuthority("ADMIN");
-                //.antMatchers("/**").permitAll();
+        http.authorizeRequests().antMatchers("/web/index.html").permitAll();
+        //Como poner para que CLIENT pueda ver el resto de paginas menos index;
+        http.authorizeRequests().antMatchers("/web/account.html").hasAuthority("CLIENT");
+        http.authorizeRequests().antMatchers("/rest/**", "h2-console/**").hasAuthority("ADMIN");
+
         http.formLogin()
                 .usernameParameter("email")
                 .passwordParameter("password")
