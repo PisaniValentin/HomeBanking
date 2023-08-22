@@ -28,8 +28,8 @@ public class HomebankingApplication {
 	, LoanRepository loanRepository, ClientLoanRepository clientLoanRepository, CardRepository cardRepository) {
 		return (args) -> {
 
-			Client melba = new Client("Melba", "Morel","melba@mindhub.com", passwordEncoder.encode("contraseñaMelba"));
-			Client valentin = new Client("Valentin", "Pisani","valentin.pisani@hotmail.com",passwordEncoder.encode("contraseñaValentin"));
+			Client melba = new Client("Melba", "Morel","melba@mindhub.com", passwordEncoder.encode("melba"));
+			Client valentin = new Client("Valentin", "Pisani","valentin.pisani@hotmail.com",passwordEncoder.encode("valentin"));
 
 			Account account1 = new Account("VIN001", LocalDate.now(),5000);
 			Account account2 = new Account("VIN002", LocalDate.now().plusDays(1),7500);

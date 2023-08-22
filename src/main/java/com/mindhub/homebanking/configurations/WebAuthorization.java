@@ -1,9 +1,11 @@
 package com.mindhub.homebanking.configurations;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 
@@ -13,13 +15,13 @@ import javax.servlet.http.HttpSession;
 
 @EnableWebSecurity
 @Configuration
-public class WebAuthorization extends WebSecurityConfigurerAdapter {
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/web/index.html").permitAll();
-        //Como poner para que CLIENT pueda ver el resto de paginas menos index;
-        http.authorizeRequests().antMatchers("/web/account.html").hasAuthority("CLIENT");
+public class WebAuthorization{
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.authorizeRequests().antMatchers("/web/index.html","/web/css/**","web/img/**","/web/js/**").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/clients").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/clients").hasAuthority("ADMIN");
+        http.authorizeRequests().antMatchers("/web/**").hasAuthority("CLIENT");
         http.authorizeRequests().antMatchers("/rest/**", "h2-console/**").hasAuthority("ADMIN");
 
         http.formLogin()
@@ -43,6 +45,7 @@ public class WebAuthorization extends WebSecurityConfigurerAdapter {
         // if logout is successful, just send a success response
         http.logout().logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler());
 
+        return http.build();
     }
 
     private void clearAuthenticationAttributes(HttpServletRequest request) {
