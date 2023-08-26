@@ -4,7 +4,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 public class Card {
@@ -26,9 +25,8 @@ public class Card {
 
     public Card(){}
 
-    public Card(Client client, CardColor color, CardType type, String cardholder,
+    public Card(CardColor color, CardType type, String cardholder,
                 String number, int cvv, LocalDate fromDate, LocalDate thruDate) {
-        this.client = client;
         this.color = color;
         this.type = type;
         this.cardholder = cardholder;

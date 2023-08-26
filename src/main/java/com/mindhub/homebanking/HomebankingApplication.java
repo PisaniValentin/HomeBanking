@@ -8,9 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
 import java.time.LocalDate;
-import java.util.LinkedList;
 import java.util.List;
 
 @SpringBootApplication
@@ -88,12 +86,15 @@ public class HomebankingApplication {
 			prestamo2.addClientLoan(clientLoan3);
 			prestamo3.addClientLoan(clientLoan4);
 
-			Card card1 = new Card(melba,CardColor.GOLD,CardType.DEBIT,"melba","123-123",123,LocalDate.now(),
+			Card card1 = new Card(CardColor.GOLD,CardType.DEBIT,"melba","123-123",123,LocalDate.now(),
 					LocalDate.now().plusYears(5));
-			Card card2 = new Card(melba,CardColor.TITANIUM,CardType.CREDIT,"melba","123-321",124,LocalDate.now(),
+			Card card2 = new Card(CardColor.TITANIUM,CardType.CREDIT,"melba","123-321",124,LocalDate.now(),
 					LocalDate.now().plusYears(5));
-			Card card3 = new Card(valentin,CardColor.SILVER,CardType.CREDIT,"valentin","123-321",124,LocalDate.now(),
+			Card card3 = new Card(CardColor.SILVER,CardType.CREDIT,"valentin","123-321",124,LocalDate.now(),
 					LocalDate.now().plusYears(5));
+			card1.setClient(melba);
+			card2.setClient(melba);
+			card3.setClient(valentin);
 			melba.addCard(card1);
 			melba.addCard(card2);
 			valentin.addCard(card3);

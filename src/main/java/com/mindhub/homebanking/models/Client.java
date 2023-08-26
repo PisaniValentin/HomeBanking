@@ -17,6 +17,7 @@ public class Client {
     @GenericGenerator(name = "native",strategy = "native")
     private long id;
     private String firstName,lastName,email,password;
+    private String authority;
 
     @OneToMany(mappedBy = "client",fetch = FetchType.EAGER)
     private Set<Account> accounts = new HashSet<>();
@@ -48,6 +49,14 @@ public class Client {
     @JsonIgnore
     public List<Loan> getLoans(){
         return clientLoans.stream().map(elem -> elem.getLoan()).collect(Collectors.toList());
+    }
+
+    public String getAuthority() {
+        return authority;
+    }
+
+    public void setAuthority(String authority) {
+        this.authority = authority;
     }
 
     public Set<Account> getAccounts(){
