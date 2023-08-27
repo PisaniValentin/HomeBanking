@@ -31,7 +31,6 @@ public class ClientController {
     @Autowired
     private AccountRepository accountRepository;
 
-
     @RequestMapping("/clients")
     public List<ClientDTO> getClients() {
         return clientRepository.findAll().stream().map(ClientDTO::new).collect(toList());
@@ -46,18 +45,19 @@ public class ClientController {
     @RequestMapping(path = "/clients", method = RequestMethod.POST)
     public ResponseEntity<Object> register(
             @RequestParam String firstName, @RequestParam String lastName,
-            @RequestParam String email, @RequestParam String password,Authentication authentication) {
-        Client client = clientRepository.findByEmail(authentication.getName());
+            @RequestParam String email, @RequestParam String password) {
         if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password.isEmpty()) {
             return new ResponseEntity<>("Missing data", HttpStatus.FORBIDDEN);
         }
         if(firstName.contains(" ") || lastName.contains(" ") || email.contains(" ") || password.contains(" ")){
-            return new ResponseEntity<>("White space not allowed", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("White spaces not allowed", HttpStatus.FORBIDDEN);
         }
         if (clientRepository.findByEmail(email) !=  null) {
             return new ResponseEntity<>("Name already in use", HttpStatus.FORBIDDEN);
         }
-        clientRepository.save(new Client(firstName, lastName, email, passwordEncoder.encode(password)));
+        Client client = new Client(firstName, lastName, email, passwordEncoder.encode(password));
+        client.setAuthority("CLIENT");
+        clientRepository.save(client);
         //Create account and assign it to the logged Client
         Account account = new Account(generateAccountNumber(), LocalDate.now(),0);
         account.setClient(client);
