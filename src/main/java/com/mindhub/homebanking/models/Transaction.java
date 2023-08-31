@@ -29,8 +29,6 @@ public class Transaction {
         date = LocalDateTime.now();
     }
 
-
-
     public float getAmount() {
         return amount;
     }
