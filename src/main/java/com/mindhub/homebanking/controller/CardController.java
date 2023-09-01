@@ -22,10 +22,10 @@ import java.util.Random;
 @RequestMapping("/api")
 public class CardController {
     @Autowired
-    CardRepository cardRepository;
+    private CardRepository cardRepository;
 
     @Autowired
-    ClientRepository clientRepository;
+    private ClientRepository clientRepository;
 
     @RequestMapping(path = "/clients/current/cards",method = RequestMethod.POST)
     public ResponseEntity<Object> createCard(@RequestParam CardType cardType,

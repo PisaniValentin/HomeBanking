@@ -59,7 +59,16 @@ public class ClientController {
         client.setAuthority("CLIENT");
         clientRepository.save(client);
         //Create account and assign it to the logged Client
-        Account account = new Account(generateAccountNumber(), LocalDate.now(),0);
+        String accountNumber = generateAccountNumber();
+        boolean numberRepeated = false;
+        while (!numberRepeated){
+            if(accountRepository.findByNumber(accountNumber) != null){
+                accountNumber = generateAccountNumber();
+            }else{
+                numberRepeated = true;
+            }
+        }
+        Account account = new Account(accountNumber, LocalDate.now(),0);
         account.setClient(client);
         client.addAccount(account);
         accountRepository.save(account);
@@ -69,7 +78,7 @@ public class ClientController {
 
     /**
      *
-     * @return A valid and unique account number
+     * @return A formatted account number
      */
     private String generateAccountNumber(){
         Random random = new Random();

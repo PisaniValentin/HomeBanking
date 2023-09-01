@@ -14,6 +14,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -21,25 +22,26 @@ import org.springframework.web.bind.annotation.RestController;
 public class TransactionController {
 
     @Autowired
-    AccountRepository accountRepository;
+    private AccountRepository accountRepository;
     @Autowired
-    ClientRepository clientRepository;
+    private ClientRepository clientRepository;
     @Autowired
-    TransactionRepository transactionRepository;
+    private TransactionRepository transactionRepository;
 
     @Transactional
     @RequestMapping(path = "/transactions",method = RequestMethod.POST)
-    public ResponseEntity<Object> createTransaction(Float amount, String description, String accNumberFrom,
-                                                    String accNumberTo, Authentication authentication){
-        if(amount == null || description.isEmpty() || accNumberTo.isEmpty() || accNumberFrom.isEmpty() ){
+    public ResponseEntity<Object> createTransaction(@RequestParam String fromAccountNumber,@RequestParam String toAccountNumber,
+                                                    @RequestParam float amount, @RequestParam String description,
+                                                    Authentication authentication){
+        if(description.isEmpty() || toAccountNumber.isEmpty() || fromAccountNumber.isEmpty() ){
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
-        if(accNumberFrom.equals(accNumberTo)){
+        if(fromAccountNumber.equals(toAccountNumber)){
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
 
-        Account accountFrom = accountRepository.findByNumber(accNumberFrom);
-        Account accountTo= accountRepository.findByNumber(accNumberTo);
+        Account accountFrom = accountRepository.findByNumber(fromAccountNumber);
+        Account accountTo= accountRepository.findByNumber(toAccountNumber);
         //check the accountFrom exist check
         if(accountFrom == null){
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
@@ -58,8 +60,8 @@ public class TransactionController {
                 return new ResponseEntity<>(HttpStatus.FORBIDDEN);
             }else{
                 //create the transactions and update de balance of each account
-                Transaction debitTransaction = new Transaction(-amount,description+" "+accNumberFrom,TransactionType.DEBIT);
-                Transaction creditTransaction = new Transaction(amount,description+" "+accNumberTo,TransactionType.CREDIT);
+                Transaction debitTransaction = new Transaction(-amount,description+" "+fromAccountNumber,TransactionType.DEBIT);
+                Transaction creditTransaction = new Transaction(amount,description+" "+toAccountNumber,TransactionType.CREDIT);
                 accountFrom.setBalance(accountFrom.getBalance()-amount);
                 accountTo.setBalance(accountTo.getBalance()+amount);
                 transactionRepository.save(debitTransaction);

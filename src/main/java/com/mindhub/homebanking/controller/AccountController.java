@@ -17,6 +17,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
@@ -27,7 +28,7 @@ public class AccountController {
     private AccountRepository accountRepository;
 
     @Autowired
-    ClientRepository clientRepository;
+    private ClientRepository clientRepository;
 
     @RequestMapping("/accounts")
     public List<AccountDTO> getAccounts(){
@@ -39,7 +40,13 @@ public class AccountController {
         return account.map(AccountDTO::new).orElse(null);
     }
 
-    @RequestMapping(path= "/api/clients/current/accounts",method = RequestMethod.POST)
+    @RequestMapping("/clients/current/accounts")
+    public List<AccountDTO> getAccounts(Authentication authentication){
+        Client client = clientRepository.findByEmail(authentication.getName());
+        return client.getAccounts().stream().map(AccountDTO::new).collect(Collectors.toList());
+    }
+
+    @RequestMapping(path= "/clients/current/accounts",method = RequestMethod.POST)
     public ResponseEntity<Object> createAccount(Authentication authentication){
         Client client = clientRepository.findByEmail(authentication.getName());
         if(client.getAccounts().size()>=3){
@@ -65,7 +72,7 @@ public class AccountController {
 
     /**
      *
-     * @return A valid and unique account number
+     * @return A formatted account number
      */
     private String generateAccountNumber(){
         Random random = new Random();
