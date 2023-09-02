@@ -4,6 +4,7 @@ import com.mindhub.homebanking.dtos.LoanApplicationDTO;
 import com.mindhub.homebanking.dtos.LoanDTO;
 import com.mindhub.homebanking.models.*;
 import com.mindhub.homebanking.repositories.*;
+import com.mindhub.homebanking.services.LoanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,14 +30,11 @@ public class LoanController {
     private ClientRepository clientRepository;
 
     @Autowired
-    private ClientLoanRepository clientLoanRepository;
-
-    @Autowired
-    private TransactionRepository transactionRepository;
+    private LoanService loanService;
 
     @RequestMapping(path = "/loans",method = RequestMethod.GET)
     public List<LoanDTO> getLoan(){
-        return loanRepository.findAll().stream().map(LoanDTO::new).collect(Collectors.toList());
+        return loanService.getLoan();
     }
 
     @Transactional
@@ -67,18 +65,7 @@ public class LoanController {
                         if(!loggedUser.getAccounts().contains(account)){
                             return new ResponseEntity<>("User is not the owner of this account", HttpStatus.FORBIDDEN);
                         }else{
-                            //if the account belong to the logged user
-                            ClientLoan clientLoan = new ClientLoan(loanAppDTO.getAmount()+ (loanAppDTO.getAmount()*20/100), loanAppDTO.getPayments());
-                            clientLoan.setClient(loggedUser);
-                            loggedUser.addClientLoan(clientLoan);
-                            existentLoan.addClientLoan(clientLoan);
-                            Transaction transaction = new Transaction(loanAppDTO.getAmount(),
-                                    existentLoan.getName()+" Loan approved",TransactionType.CREDIT);
-                            account.setBalance(account.getBalance()+ loanAppDTO.getAmount());
-                            accountRepository.save(account);
-                            transactionRepository.save(transaction);
-                            clientRepository.save(loggedUser);
-                            clientLoanRepository.save(clientLoan);
+                            loanService.createLoan(loanAppDTO, authentication,loggedUser,account,existentLoan);
                             return new ResponseEntity<>("Loan created", HttpStatus.CREATED);
                         }
                     }
