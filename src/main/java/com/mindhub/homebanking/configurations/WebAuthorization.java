@@ -20,8 +20,8 @@ public class WebAuthorization{
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("/rest/**","/h2-console/**").hasAuthority("ADMIN");
         http.authorizeRequests().antMatchers("/web/index.html","/web/css/**","/web/img/**","/web/js/**").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/clients/**","/api/accounts/**").hasAuthority("CLIENT");
-        http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/clients/current/accounts", "/api/clients/current/cards" ,"/api/transactions").hasAuthority("CLIENT");
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/clients/**","/api/accounts/**","/api/loans").hasAuthority("CLIENT");
+        http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/clients/current/accounts", "/api/clients/current/cards" ,"/api/transactions","/api/loans").hasAuthority("CLIENT");
         http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/clients").permitAll();
         http.authorizeRequests().antMatchers("/web/**").hasAuthority("CLIENT");
 
