@@ -65,7 +65,7 @@ public class LoanController {
                         if(!loggedUser.getAccounts().contains(account)){
                             return new ResponseEntity<>("User is not the owner of this account", HttpStatus.FORBIDDEN);
                         }else{
-                            loanService.createLoan(loanAppDTO, authentication,loggedUser,account,existentLoan);
+                            loanService.createLoan(loanAppDTO,loggedUser,account,existentLoan);
                             return new ResponseEntity<>("Loan created", HttpStatus.CREATED);
                         }
                     }

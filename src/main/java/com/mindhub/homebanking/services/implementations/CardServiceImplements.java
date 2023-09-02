@@ -8,11 +8,8 @@ import com.mindhub.homebanking.repositories.CardRepository;
 import com.mindhub.homebanking.repositories.ClientRepository;
 import com.mindhub.homebanking.services.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.util.Random;
 
@@ -25,7 +22,7 @@ public class CardServiceImplements implements CardService {
     private ClientRepository clientRepository;
 
     @Override
-    public ResponseEntity<Object> createCard(CardType cardType, CardColor cardColor, Authentication authentication, Client client) {
+    public void createCard(CardType cardType, CardColor cardColor, Authentication authentication, Client client) {
         Random random = new Random();
         int cvvNumber = random.nextInt(1000);
         String cardNumber = generateCardNumber();
@@ -44,9 +41,7 @@ public class CardServiceImplements implements CardService {
         card.setClient(client);
         cardRepository.save(card);
         clientRepository.save(client);
-        return new ResponseEntity<>("created", HttpStatus.CREATED);
     }
-
 
     /**
      *
@@ -64,6 +59,4 @@ public class CardServiceImplements implements CardService {
         String formattedNumber4 = String.format("%04d",randomNumber4);
         return formattedNumber1+"-"+formattedNumber2+"-"+formattedNumber3+"-"+formattedNumber4;
     }
-
-
 }

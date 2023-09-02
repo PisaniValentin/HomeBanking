@@ -11,6 +11,6 @@ import java.util.List;
 
 public interface LoanService {
     public List<LoanDTO> getLoan();
-    public void createLoan(LoanApplicationDTO loanAppDTO, Authentication authentication,
+    public void createLoan(LoanApplicationDTO loanAppDTO,
                            Client loggedUser, Account account, Loan loan);
 }

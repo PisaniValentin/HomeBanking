@@ -36,7 +36,7 @@ public class LoanServiceImplements implements LoanService {
     }
 
     @Override
-    public void createLoan(LoanApplicationDTO loanAppDTO, Authentication authentication, Client loggedUser, Account account, Loan loan) {
+    public void createLoan(LoanApplicationDTO loanAppDTO,Client loggedUser, Account account, Loan loan) {
         //if the account belong to the logged user
         ClientLoan clientLoan = new ClientLoan(loanAppDTO.getAmount()+ (loanAppDTO.getAmount()*20/100), loanAppDTO.getPayments());
         clientLoan.setClient(loggedUser);

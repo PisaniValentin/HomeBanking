@@ -7,5 +7,5 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 
 public interface CardService {
-    public ResponseEntity<Object> createCard(CardType cardType, CardColor cardColor, Authentication authentication, Client client);
+    public void createCard(CardType cardType, CardColor cardColor, Authentication authentication, Client client);
 }
