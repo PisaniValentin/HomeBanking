@@ -27,17 +27,17 @@ public class ClientController {
     @Autowired
     private ClientService clientService;
 
-    @RequestMapping("/clients")
+    @GetMapping("/clients")
     public List<ClientDTO> getClients() {
         return clientService.getAllClients();
     }
 
-    @RequestMapping("/clients/{id}")
+    @GetMapping("/clients/{id}")
     public ClientDTO getClient(@PathVariable long id) {
         return clientService.getClientById(id);
     }
 
-    @RequestMapping(path = "/clients", method = RequestMethod.POST)
+    @PostMapping("/clients")
     public ResponseEntity<Object> register(
             @RequestParam String firstName, @RequestParam String lastName,
             @RequestParam String email, @RequestParam String password) {
@@ -54,7 +54,7 @@ public class ClientController {
         return new ResponseEntity<>("Client registered", HttpStatus.CREATED);
     }
 
-    @RequestMapping("/clients/current")
+    @GetMapping("/clients/current")
     public ClientDTO getClientDTO(Authentication authentication){
         return clientService.getLoggedClientDTO(authentication);
     }

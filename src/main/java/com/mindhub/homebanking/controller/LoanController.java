@@ -32,13 +32,13 @@ public class LoanController {
     @Autowired
     private LoanService loanService;
 
-    @RequestMapping(path = "/loans",method = RequestMethod.GET)
+    @GetMapping("/loans")
     public List<LoanDTO> getLoan(){
         return loanService.getLoan();
     }
 
     @Transactional
-    @RequestMapping(path="/loans", method = RequestMethod.POST)
+    @PostMapping("/loans")
     public ResponseEntity<Object> createLoan(@RequestBody LoanApplicationDTO loanAppDTO, Authentication authentication){
         if(loanAppDTO.getToAccountNumber().isEmpty()|| loanAppDTO.getAmount() == 0
                 || loanAppDTO.getPayments() == 0){
