@@ -14,8 +14,8 @@ import java.util.List;
 @SpringBootApplication
 public class HomebankingApplication {
 
-	@Autowired
-	private PasswordEncoder passwordEncoder;
+	//@Autowired
+	//private PasswordEncoder passwordEncoder;
 
 	public static void main(String[] args) {
 		SpringApplication.run(HomebankingApplication.class, args);
@@ -25,6 +25,7 @@ public class HomebankingApplication {
 	public CommandLineRunner initData(ClientRepository clientRepository, AccountRepository accountRepository, TransactionRepository transactionRepository
 	, LoanRepository loanRepository, ClientLoanRepository clientLoanRepository, CardRepository cardRepository) {
 		return (args) -> {
+			/**
 			Client melba = new Client("Melba", "Morel","melba@mindhub.com", passwordEncoder.encode("melba"));
 			Client valentin = new Client("Valentin", "Pisani","valentin.pisani@hotmail.com",passwordEncoder.encode("valentin"));
 			melba.setAuthority("CLIENT");
@@ -100,14 +101,14 @@ public class HomebankingApplication {
 			melba.addCard(card2);
 			valentin.addCard(card3);
 
-			loanRepository.save(prestamo1);
-			loanRepository.save(prestamo2);
-			loanRepository.save(prestamo3);
+			//loanRepository.save(prestamo1);
+			//loanRepository.save(prestamo2);
+			//loanRepository.save(prestamo3);
 
-			clientRepository.save(melba);
-			clientRepository.save(valentin);
+			//clientRepository.save(melba);
+			//clientRepository.save(valentin);
 
-
+/**
 			accountRepository.save(account1);
 			accountRepository.save(account2);
 			accountRepository.save(account3);
@@ -127,7 +128,7 @@ public class HomebankingApplication {
 			cardRepository.save(card1);
 			cardRepository.save(card2);
 			cardRepository.save(card3);
-
+**/
 
 		};
 	}
