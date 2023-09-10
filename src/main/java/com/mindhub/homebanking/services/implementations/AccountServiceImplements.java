@@ -32,7 +32,7 @@ public class AccountServiceImplements implements AccountService {
     }
 
     @Override
-    public AccountDTO getClient(long id) {
+    public AccountDTO getAccount(long id) {
         Optional<Account> account = accountRepository.findById(id);
         return account.map(AccountDTO::new).orElse(null);
     }

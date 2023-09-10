@@ -28,7 +28,7 @@ public class AccountController {
     }
     @GetMapping("/accounts/{id}")
     public AccountDTO getClient(@PathVariable long id) {
-        return accountService.getClient(id);
+        return accountService.getAccount(id);
     }
 
     @GetMapping("/clients/current/accounts")

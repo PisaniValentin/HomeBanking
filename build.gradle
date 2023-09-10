@@ -29,6 +29,8 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
+	implementation group: 'com.itextpdf', name: 'html2pdf', version: '5.0.1'
+
 }
 
 tasks.named('test') {

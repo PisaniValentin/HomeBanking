@@ -12,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+
 @RestController
 @RequestMapping("/api")
 public class TransactionController {
@@ -29,10 +30,10 @@ public class TransactionController {
                                                     @RequestParam float amount, @RequestParam String description,
                                                     Authentication authentication){
         if(description.isEmpty() || toAccountNumber.isEmpty() || fromAccountNumber.isEmpty() ){
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("Some field is empty",HttpStatus.FORBIDDEN);
         }
         if(fromAccountNumber.equals(toAccountNumber)){
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("The account origin is the same as the destiny account",HttpStatus.FORBIDDEN);
         }
         Account accountFrom = accountRepository.findByNumber(fromAccountNumber);
         Account accountTo= accountRepository.findByNumber(toAccountNumber);
@@ -49,6 +50,9 @@ public class TransactionController {
             if(accountTo == null){
                 return new ResponseEntity<>("Destiny account doesn't exist",HttpStatus.FORBIDDEN);
             }
+            if(amount < 0){
+                return new ResponseEntity<>("Invalid amount",HttpStatus.FORBIDDEN);
+            }
             //check if the account have the balance to do the transaction
             if(accountFrom.getBalance() < amount){
                 return new ResponseEntity<>("Not enough balance to do the transaction",HttpStatus.FORBIDDEN);
@@ -59,5 +63,4 @@ public class TransactionController {
             }
         }
     }
-
 }

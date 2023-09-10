@@ -34,6 +34,23 @@ Vue.createApp({
                     this.errorToats.show();
                 })
         },
+        getResume: function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const id = urlParams.get('id');
+              axios.get(`/api/generate-report/${id}`)
+                .then((response) => {
+                  //get client ifo
+                    //this.accountInfo = response.data;
+                    console.log(this.accountInfo);
+                    //this.accountInfo.transactions.sort((a, b) => (b.id - a.id))
+                    })
+                    .catch((error) => {
+                    // handle error
+                    this.errorMsg = "Error getting data";
+                    this.errorToats.show();
+            })
+
+        },
     },
     mounted: function () {
         this.errorToats = new bootstrap.Toast(document.getElementById('danger-toast'));

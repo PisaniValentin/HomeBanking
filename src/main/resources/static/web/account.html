@@ -82,7 +82,9 @@
                     <div class="row mt-3">
                         <div class="col">
                             <h2 class="display-6 account">Account Number: {{ accountInfo.number }} - Balance: ${{
-                                accountInfo.balance }}</h2>
+                                accountInfo.balance }}
+                                <a target="_blank" href="/web/pdf.html" type="submit" v-on:click="getResume">Generate Resume</a>
+                            </h2>
                         </div>
                     </div>
                     <div class="row mt-3">
