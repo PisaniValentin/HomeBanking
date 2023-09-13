@@ -37,13 +37,13 @@ Vue.createApp({
         getResume: function () {
             const urlParams = new URLSearchParams(window.location.search);
             const id = urlParams.get('id');
-              axios.get(`/api/generate-report/${id}`)
+              axios.get(`/api/generate-report/${id}`,{ responseType: 'blob' })
                 .then((response) => {
-                  //get client ifo
-                    //this.accountInfo = response.data;
-                    console.log(this.accountInfo);
-                    //this.accountInfo.transactions.sort((a, b) => (b.id - a.id))
-                    })
+                    const blob = new Blob([response.data], { type: 'application/pdf' });
+                    const url = window.URL.createObjectURL(blob);
+                    // Open the PDF in a new tab or window
+                    window.open(url, '_blank');
+                })
                     .catch((error) => {
                     // handle error
                     this.errorMsg = "Error getting data";
