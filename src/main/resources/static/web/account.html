@@ -113,8 +113,8 @@
                             <div class="col">
                                 From:
                                 <select name="select" id="">
-                                    <option v-bind:value="transaction.date"
-                                        v-for="transaction in accountInfo.transactions">
+                                    <option id="fromDate" v-bind:value="transaction.date"
+                                        v-for="transaction in accountInfo.transactions" :value="transaction.date"> 
                                         {{transaction.date}}
                                     </option>
                                 </select>
@@ -122,8 +122,8 @@
                             <div class="col">
                                 To:
                                 <select name="select" id="">
-                                    <option id="toDate" value="transaction.date"
-                                        v-for="transaction in accountInfo.transactions">
+                                    <option id="toDate" 
+                                        v-for="transaction in accountInfo.transactions" :value="transaction.date">
                                         {{transaction.date}}
                                     </option>
                                 </select>

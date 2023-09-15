@@ -38,10 +38,11 @@ Vue.createApp({
         getResume: function () {
             const urlParams = new URLSearchParams(window.location.search);
             const id = urlParams.get('id');
-            const start = document.getElementById();
+            const start = document.getElementById('fromDate');
+            const end = document.getElementById('toDate');
+            console.log(end.value);
 
-
-              axios.get(`/api/generate-report/${id}`,{ responseType: 'blob' })
+              axios.get(`/api/generate-report?id=${id}&start=${start.value}&end=${end.value}`,{ responseType: 'blob' })
                 .then((response) => {
                     const blob = new Blob([response.data], { type: 'application/pdf' });
                     const contentDisposition = response.headers['content-disposition'];

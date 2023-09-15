@@ -35,7 +35,7 @@ public class PDFReportController extends HttpServlet {
 
 
     @GetMapping("/generate-report")
-    public void generatePDF(@PathVariable long id,@PathVariable LocalDateTime start,@PathVariable LocalDateTime end, HttpServletResponse response){
+    public void generatePDF(@RequestParam long id,@RequestParam LocalDateTime start,@RequestParam LocalDateTime end, HttpServletResponse response){
         response.setContentType("application/pdf");
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
         String currentDateTime = dateFormatter.format(new Date());
