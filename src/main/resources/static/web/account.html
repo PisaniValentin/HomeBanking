@@ -83,7 +83,6 @@
                         <div class="col">
                             <h2 class="display-6 account">Account Number: {{ accountInfo.number }} - Balance: ${{
                                 accountInfo.balance }}
-                                <a type="submit" v-on:click="getResume">Generate Resume</a>
                             </h2>
                         </div>
                     </div>
@@ -109,6 +108,27 @@
                                     </tr>
                                 </tbody>
                             </table>
+                        </div>
+                        <div class="col">
+                            <div class="col">
+                                From:
+                                <select name="select" id="">
+                                    <option v-bind:value="transaction.date"
+                                        v-for="transaction in accountInfo.transactions">
+                                        {{transaction.date}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                To:
+                                <select name="select" id="">
+                                    <option id="toDate" value="transaction.date"
+                                        v-for="transaction in accountInfo.transactions">
+                                        {{transaction.date}}
+                                    </option>
+                                </select>
+                            </div>
+                            <a type="submit" v-on:click="getResume">| Generate Resume |</a>
                         </div>
                     </div>
                 </div>

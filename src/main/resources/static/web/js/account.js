@@ -10,6 +10,7 @@ Vue.createApp({
         getData: function () {
             const urlParams = new URLSearchParams(window.location.search);
             const id = urlParams.get('id');
+
             axios.get(`/api/accounts/${id}`)
                 .then((response) => {
                     //get client ifo
@@ -37,12 +38,22 @@ Vue.createApp({
         getResume: function () {
             const urlParams = new URLSearchParams(window.location.search);
             const id = urlParams.get('id');
+            const start = document.getElementById();
+
+
               axios.get(`/api/generate-report/${id}`,{ responseType: 'blob' })
                 .then((response) => {
                     const blob = new Blob([response.data], { type: 'application/pdf' });
+                    const contentDisposition = response.headers['content-disposition'];
+                    const matches = contentDisposition.match(/filename=([^;]+)/);
+                    const filename = matches ? matches[1] : 'download.pdf';
                     const url = window.URL.createObjectURL(blob);
-                    // Open the PDF in a new tab or window
-                    window.open(url, '_blank');
+                    // Create a temporary anchor element to trigger the download
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = filename;
+                    // Trigger the download by simulating a click on the anchor element
+                    a.click();
                 })
                     .catch((error) => {
                     // handle error
