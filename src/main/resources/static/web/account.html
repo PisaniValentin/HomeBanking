@@ -95,6 +95,7 @@
                                         <th>Nº</th>
                                         <th>Description</th>
                                         <th>Date</th>
+                                        <th>Time</th>
                                         <th>Amount</th>
                                     </tr>
                                 </thead>
@@ -104,29 +105,30 @@
                                         <td>{{ index+1 }}</td>
                                         <td>{{ transaction.description }}</td>
                                         <td>{{ formatDate(transaction.date) }}</td>
+                                        <td>{{ getTime(transaction.date) }}</td>
                                         <td>{{ transaction.amount }}</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
-                        <div class="col">
-                            <div class="col">
+                        <div class="row">
+                            <div class="col-6">
                                 From:
-                                <select v-model="fromSelected" name="selectFrom" id="From">
+                                <select v-model="fromSelected" id="From">
                                     <option v-for="transaction in accountInfo.transactions" v-bind:value="transaction.date"> 
-                                        {{transaction.date}}
+                                        {{ formatDate(transaction.date) }} {{ getTime(transaction.date) }}
                                     </option>
                                 </select>
                             </div>
-                            <div class="col">
+                            <div class="col-6">
                                 To:
-                                <select v-model="toSelected" name="selectTo" id="To">
+                                <select v-model="toSelected" id="To">
                                     <option v-for="transaction in accountInfo.transactions" v-bind:value="transaction.date">
-                                        {{transaction.date}}
+                                        {{ formatDate(transaction.date) }} {{ getTime(transaction.date) }}
                                     </option>
                                 </select>
                             </div>
-                            <a type="submit" v-on:click="getResume">| Generate Resume |</a>
+                            <button type="submit" v-on:click="getResume"> Generate Resume </button>
                         </div>
                     </div>
                 </div>

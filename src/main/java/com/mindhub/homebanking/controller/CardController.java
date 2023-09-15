@@ -17,6 +17,7 @@ public class CardController {
     @Autowired
     private ClientRepository clientRepository;
 
+    @Autowired
     private CardService cardService;
 
     @PostMapping("/clients/current/cards")

@@ -29,6 +29,9 @@ Vue.createApp({
         formatDate: function (date) {
             return new Date(date).toLocaleDateString('en-gb');
         },
+        getTime: function(date){
+            return date.split('T')[1].split('.')[0];
+        },
         signOut: function () {
             axios.post('/api/logout')
                 .then(response => window.location.href = "/web/index.html")
@@ -40,11 +43,6 @@ Vue.createApp({
         getResume: function () {
             const urlParams = new URLSearchParams(window.location.search);
             const id = urlParams.get('id');
-            //const start = document.getElementById('fromDate');
-            //const end = document.getElementById('toDate');
-            //console.log("start:"+this.fromSelected);
-            //console.log("end"+this.toSelected);
-
               axios.get(`/api/generate-report?id=${id}&start=${this.fromSelected}&end=${this.toSelected}`,{ responseType: 'blob' })
                 .then((response) => {
                     const blob = new Blob([response.data], { type: 'application/pdf' });
