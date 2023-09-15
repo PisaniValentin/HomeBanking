@@ -4,6 +4,8 @@ Vue.createApp({
             accountInfo: {},
             errorToats: null,
             errorMsg: null,
+            fromSelected: null,
+            toSelected:null,
         }
     },
     methods: {
@@ -15,7 +17,7 @@ Vue.createApp({
                 .then((response) => {
                     //get client ifo
                     this.accountInfo = response.data;
-                    console.log(this.accountInfo);
+                    //console.log(this.accountInfo);
                     this.accountInfo.transactions.sort((a, b) => (b.id - a.id))
                 })
                 .catch((error) => {
@@ -38,11 +40,12 @@ Vue.createApp({
         getResume: function () {
             const urlParams = new URLSearchParams(window.location.search);
             const id = urlParams.get('id');
-            const start = document.getElementById('fromDate');
-            const end = document.getElementById('toDate');
-            console.log(end.value);
+            //const start = document.getElementById('fromDate');
+            //const end = document.getElementById('toDate');
+            //console.log("start:"+this.fromSelected);
+            //console.log("end"+this.toSelected);
 
-              axios.get(`/api/generate-report?id=${id}&start=${start.value}&end=${end.value}`,{ responseType: 'blob' })
+              axios.get(`/api/generate-report?id=${id}&start=${this.fromSelected}&end=${this.toSelected}`,{ responseType: 'blob' })
                 .then((response) => {
                     const blob = new Blob([response.data], { type: 'application/pdf' });
                     const contentDisposition = response.headers['content-disposition'];

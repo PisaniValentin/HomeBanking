@@ -23,6 +23,11 @@ public class TransactionServiceImplements implements TransactionService {
         Transaction creditTransaction = new Transaction(amount,description+" "+toAccountNumber,TransactionType.CREDIT);
         accountFrom.setBalance(accountFrom.getBalance()-amount);
         accountTo.setBalance(accountTo.getBalance()+amount);
+        accountFrom.addTransaction(debitTransaction);
+        accountTo.addTransaction(creditTransaction);
+        debitTransaction.setAccount(accountFrom);
+        creditTransaction.setAccount(accountTo);
+
         transactionRepository.save(debitTransaction);
         transactionRepository.save(creditTransaction);
         accountRepository.save(accountFrom);
