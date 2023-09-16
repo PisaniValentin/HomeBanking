@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css?family=Aldrich');
+
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Aldrich';
+    box-sizing: border-box;
+}
+body{
+    background-color: rgb(24, 24, 24);
+}
+
+h1{
+    color:#baff43;
+    font-weight: bold !important;
+}
+
+h2{
+    color: #baff43;
+}
+
+.nav a{
+    color:white;
+}
+
+.nav a:hover{
+    color:#baff43;
+}
+
+.nav a[href="#"]{
+    color:#baff43 !important;
+    background-color: rgb(0, 0, 0) !important;
+}
+
+label{
+    color: white;
+}
+
+
+.account {
+    background: linear-gradient(45deg, #ee0979, #ff6a00);
+    color: white;
+    box-shadow: 1px 1px 5px black;
+}
+
+.account:hover {
+    box-shadow: 12px 14px 5px black;
+}
+
+.account-details-header {
+    background: linear-gradient(45deg, #ee0979, #ff6a00);
+    color: white;
+}
+
+.account-balance {
+    font-size: 2em;
+    margin: 0px;
+}
+
+.account-link {
+    text-decoration: none;
+}
+
+.subtitle {
+    display: inline;
+}
+
+#create {
+    margin-bottom: 15px;
+}
+
+.credit-transaction {
+    color: green;
+}
+
+.debit-transaction {
+    color: red;
+}
+
+.loan {
+    background: linear-gradient(45deg, #ee09cf, #0026ff) ;
+    color: white;
+}
+
+.menu-logo {
+    width: 100px;
+    height: 40px;
+}
+
+.welcome {
+    background: linear-gradient(45deg, #5573f8cc, #2d0a66);
+}
+
+.welcome-logo {
+    width: 60%;
+}
+
+.index-body {
+    background-image: url(../img/mindhub.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.index-container {
+    margin-top: 10%;
+}
+
+.rounded-5 {
+    border-radius: 10px;
+}
+
+#create{
+    background-color: rgb(0, 0, 0);
+    color: #ee09cf;
+    border-color: black;
+}
+#create:hover{
+    background-color: white;
+}
+
+.resume{
+    color: white;
+    align-items: flex-end;
+}
+.resume button{
+    background-color: black;
+    color: #baff43;
+}
+
+th{
+    color: white;
+}
