@@ -39,7 +39,14 @@
 }
 
 .titanium-plastic-card {
-	background: linear-gradient(45deg, #6ea3e0, #185781);
+	background: linear-gradient(48deg, #000000, #1d1b1b);
+}
+
+.titanium-plastic-card p{
+	color: #caa62c;
+}
+.titanium-plastic-card span{
+	color: #caa62c;
 }
 
 
